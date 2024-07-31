@@ -1,0 +1,19 @@
+# pod1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod1
+spec:
+  nodeSelector:
+    topology.kubernetes.io/zone: us-west-2a
+  containers:
+  - name: mycontainer
+    image: nginx
+    volumeMounts:
+    - name: myvolume
+      mountPath: /data/subdir1  # Subdirectory for the first pod
+      subPath: subdir1
+  volumes:
+  - name: myvolume
+    persistentVolumeClaim:
+      claimName: pvc1
